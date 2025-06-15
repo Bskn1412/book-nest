@@ -2,17 +2,18 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
+import './index.css';
 
 function Home() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="home">
       <h2>Welcome Home</h2>
-      <button onClick={() => navigate('/login')} style={{ margin: '10px' }}>
+      <button onClick={() => navigate('/login')} >
         Login
       </button>
-      <button onClick={() => navigate('/signup')} style={{ margin: '10px' }}>
+      <button onClick={() => navigate('/signup')} >
         Signup
       </button>
     </div>
