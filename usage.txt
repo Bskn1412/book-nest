@@ -1,0 +1,5 @@
+npm install react-router-dom
+npm init -y
+npm install express mongoose cors dotenv bcrypt jsonwebtoken
+✅
+npm install axios
