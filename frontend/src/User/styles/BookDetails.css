@@ -1,0 +1,93 @@
+.book-detail-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+
+  min-height: 80vh;
+}
+
+.book-detail-card {
+  display: flex;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.book-image {
+  width: 250px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-info h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin: 0.5rem 0;
+}
+
+.desc {
+  margin: 1rem 0;
+  color: #444;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  position: inherit;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.primary {
+  background-color: #28a745;
+  color: white;
+}
+
+.secondary {
+  background-color: #ffc107;
+  color: black;
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+.book-card button {
+  display: block;
+  margin: 0 auto 1rem;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.book-card button:hover {
+  background-color: #d32f2f;
+}

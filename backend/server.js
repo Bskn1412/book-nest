@@ -6,6 +6,7 @@ import cors from 'cors';
 import userRoutes from './routes/users.js';
 import sellerRoutes from './routes/seller.js';
 import bookRoutes from './routes/book.js';
+import loginRoutes from './routes/auth.js';
 fetch('http://localhost:5000/api/books/seed', { method: 'POST' });
 dotenv.config();
 
@@ -22,30 +23,9 @@ connect(process.env.MONGO_URI, {})
 app.use('/api/users', userRoutes);       // e.g. /api/user/signup
 app.use('/api/seller', sellerRoutes);   // e.g. /api/seller/signup
 app.use('/api/books', bookRoutes);      // e.g. /api/books (GET, seed, etc.)
+app.use('/api/login', loginRoutes);
 
-// Optional: Common login route for both user/seller
-import User from './models/User.js';
-import Seller from './models/Seller.js';
 
-app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    let account = await User.findOne({ email });
-    let role = 'user';
-
-    if (!account) {
-      account = await Seller.findOne({ email });
-      role = 'seller';
-    }
-
-    if (!account) return res.status(404).json({ error: 'Account not found' });
-    if (account.password !== password) return res.status(401).json({ error: 'Incorrect password' });
-
-    res.status(200).json({ message: 'Login successful', role });
-  } catch (err) {
-    res.status(500).json({ error: 'Login failed', details: err.message });
-  }
-});
 
 // Start Server
 const PORT = process.env.PORT || 5000;
