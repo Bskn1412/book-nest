@@ -1,0 +1,10 @@
+.ff h2,p{
+    color: white;
+}
+p{
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

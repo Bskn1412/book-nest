@@ -67,13 +67,15 @@ export default function Login() {
         />
         <br />
         <button type="submit">Login</button>
-      </form>
- 
 
-      <div className="check">
+          <div className="check">
         <p>Don't have an account?</p>
         <button onClick={handleSignupClick}>Go to Signup</button>
       </div>
+      </form>
+ 
+
+    
      </div>
     </>
   );

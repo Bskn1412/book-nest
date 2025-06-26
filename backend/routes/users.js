@@ -39,13 +39,24 @@ app.delete('/:userId/cart/:bookId', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.post('/:id/orders', async (req, res) => {
+  const userId = req.params.id;
+  const { books } = req.body; // books: [{ bookId }]
 
+  try {
+    const order = new Order({
+      user: userId,
+      books: books.map(b => b.bookId),
+      status: 'success',
+      date: new Date()
+    });
 
-
-
-
-
-
+    await order.save();
+    res.json({ message: 'Order placed successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 app.post('/:userId/favorites', async (req, res) => {
   const { bookId } = req.body;
   try {
@@ -70,28 +81,6 @@ app.delete('/:userId/favorites/:bookId', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-app.post('/:id/orders', async (req, res) => {
-  const userId = req.params.id;
-  const { books } = req.body; // books: [{ bookId }]
-
-  try {
-    const order = new Order({
-      user: userId,
-      books: books.map(b => b.bookId),
-      status: 'success',
-      date: new Date()
-    });
-
-    await order.save();
-    res.json({ message: 'Order placed successfully' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
 app.get('/:userId/cart', async (req, res) => {
   const user = await User.findById(req.params.userId).populate('cart');
   res.json(user.cart);
@@ -102,20 +91,28 @@ app.get('/:userId/favorites', async (req, res) => {
   res.json(user.favorites);
 });
 
+
 app.post('/:userId/purchase', async (req, res) => {
+  const { bookId } = req.body;
+  if (!bookId) return res.status(400).json({ error: 'bookId is required' });
+
   try {
     const user = await User.findById(req.params.userId);
-    if (user.cart.length === 0) {
-      return res.status(400).json({ message: 'Cart is empty' });
+
+    if (!user.cart.includes(bookId)) {
+      return res.status(400).json({ message: 'Book not in cart' });
     }
-    user.orders.push({ items: [...user.cart] });
-    user.cart = [];
+
+    user.orders.push({ items: [bookId] });
+    user.cart = user.cart.filter(id => id.toString() !== bookId);
+
     await user.save();
     res.json({ message: 'Purchase successful' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.get('/:userId/orders', async (req, res) => {
   const user = await User.findById(req.params.userId).populate('orders.items');

@@ -47,6 +47,7 @@ return (
               <p className='user'>Hello, {user.name}</p>
               <button onClick={() => navigate('/user/cart')}>View Cart</button>
               <button onClick={() => navigate('/user/favorites')}>Favorites</button>
+              <button onClick={() => navigate('/orders')}>Orders</button>
               <button
                 onClick={logoutUser}
                 style={{

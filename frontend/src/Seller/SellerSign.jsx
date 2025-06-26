@@ -23,6 +23,7 @@ export default function SellerSign() {
   };
 
   return (
+    <div className='container'>
     <form onSubmit={handleSubmit}>
       <h2>Seller Signup</h2>
       <input type="text" name='name' placeholder='name' value={name} onChange={(e) => setName(e.target.value)} required/><br />
@@ -31,5 +32,6 @@ export default function SellerSign() {
         <input type="password" name='password' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} required /><br />
         <button type='submit'>SignUp</button>
     </form>
+    </div>
   );
 }

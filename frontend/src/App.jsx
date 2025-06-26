@@ -9,6 +9,7 @@ import SellerSign from './Seller/SellerSign';
 import BookDetails from './User/BookDetails';
 import Cart from './User/Cart';
 import Favorites from './User/Favorites';
+import OrderHistory from './User/OrderHistory';
 export default function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/book/:id" element={<BookDetails />} />
         <Route path="/user/cart" element={<Cart />} />
         <Route path="/user/favorites" element={<Favorites />} />
+        <Route path="/orders" element={<OrderHistory />} />
       </Routes>
     </Router>
   );

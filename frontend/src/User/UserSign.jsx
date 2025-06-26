@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import './styles/usersign.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +42,7 @@ export default function UserSign() {
 
 return (
     <>
+    <div className='container'>
     <form onSubmit = {handleSubmit} >
         <h1>User Sign Up</h1>
       {/* <select value={role} onChange={(e) => setRole(e.target.value)} >
@@ -54,10 +55,13 @@ return (
         <input type="password" name='password' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} required /><br />
         <input type="password" name='re-password' placeholder='re-type password' value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} required /><br />
         <button type='submit'>SignUp</button>
-    </form>
-    <div className='check'>
+
+
+         <div className='check'>
       <p>Already have an account?</p>
       <button onClick={handleLoginClick}>Go to Login</button>
     </div>
+    </form>
+   </div>
     </>
 )}
