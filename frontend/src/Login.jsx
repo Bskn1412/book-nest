@@ -25,6 +25,7 @@ export default function Login() {
 
       // Store user info for use in other components (e.g., profile, navbar)
      localStorage.setItem('user', JSON.stringify(response.data.user));
+
      console.log('User data stored in localStorage:', response.data.user);
 
       alert(message || 'Login successful!');
@@ -67,15 +68,11 @@ export default function Login() {
         />
         <br />
         <button type="submit">Login</button>
-
           <div className="check">
         <p>Don't have an account?</p>
         <button onClick={handleSignupClick}>Go to Signup</button>
       </div>
       </form>
- 
-
-    
      </div>
     </>
   );

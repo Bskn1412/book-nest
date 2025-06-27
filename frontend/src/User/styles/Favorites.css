@@ -1,10 +1,10 @@
 .favorites-page {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 3rem;
+  max-width: 200px;
   margin: auto;
 }
 
-.favorites-page h2 {
+.header h2 {
   text-align: center;
   margin-bottom: 2rem;
   color: #da3636;

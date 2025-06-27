@@ -12,6 +12,43 @@ app.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch books' });
   }
 });
+
+
+
+
+app.post('/', async (req, res) => {
+  try {
+    const { title, price, description, image, sellerId } = req.body;
+
+    const newBook = new Book({
+      title,
+      price,
+      description,
+      image,
+      seller: sellerId,
+    });
+
+    await newBook.save();
+    res.status(201).json({ message: 'Book added successfully', book: newBook });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// Get all books by a specific seller
+app.get('/seller/:sellerId', async (req, res) => {
+  try {
+    const books = await Book.find({ seller: req.params.sellerId });
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+
+
+
 // Seed books (optional utility)
 app.post('/seed', async (req, res) => {
   await Book.deleteMany();

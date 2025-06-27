@@ -28,8 +28,9 @@ export default function Favorites() {
   if (!user) return <p style={{ textAlign: 'center' }}>Please login to view your favorites.</p>;
 
   return (
+     <div className="header">
+          <h2>Your Favorites</h2>
     <div className="favorites-page">
-      <h2>Your Favorites</h2>
       {favorites.length === 0 ? (
         <p>No favorite books yet.</p>
       ) : (
@@ -46,6 +47,7 @@ export default function Favorites() {
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

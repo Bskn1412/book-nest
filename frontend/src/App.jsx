@@ -20,11 +20,12 @@ export default function App() {
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/seller/signup" element={<SellerSign />} />
         {/* <Route path="/admin/dashboard" element={<AdminDashboard />} />  */}
-        <Route path="/seller/dashboard" element={<SellerDashboard />} />
         <Route path="/book/:id" element={<BookDetails />} />
         <Route path="/user/cart" element={<Cart />} />
         <Route path="/user/favorites" element={<Favorites />} />
         <Route path="/orders" element={<OrderHistory />} />
+
+          <Route path="/seller/dashboard" element={<SellerDashboard />} />
       </Routes>
     </Router>
   );
