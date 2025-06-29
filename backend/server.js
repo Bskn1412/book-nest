@@ -2,11 +2,14 @@ import express from 'express';
 import { connect } from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
 
 import userRoutes from './routes/users.js';
 import sellerRoutes from './routes/seller.js';
 import bookRoutes from './routes/book.js';
-import loginRoutes from './routes/auth.js';
+//import loginRoutes from './routes/auth.js';
+import userLogin from './routes/userlog.js';
+import sellerLogin from './routes/sellerlog.js';
 fetch('http://localhost:5000/api/books/seed', { method: 'POST' });
 dotenv.config();
 
@@ -23,9 +26,11 @@ connect(process.env.MONGO_URI, {})
 app.use('/api/users', userRoutes);       // e.g. /api/user/signup
 app.use('/api/seller', sellerRoutes);   // e.g. /api/seller/signup
 app.use('/api/books', bookRoutes);      // e.g. /api/books (GET, seed, etc.)
-app.use('/api/login', loginRoutes);
+//app.use('/api/login', loginRoutes);
+app.use('/api/user/login', userLogin);
+app.use('/api/seller/login', sellerLogin);
 
-
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Start Server
 const PORT = process.env.PORT || 5000;

@@ -1,10 +1,12 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
- const seller = JSON.parse(localStorage.getItem('seller'));
+import './sellerDash.css';
+
 export default function SellerDashboard() {
   const navigate = useNavigate();
-  const [seller, setSeller] = useState(); 
+  const [seller, setSeller] = useState(null);
+  const [books, setBooks] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [book, setBook] = useState({
     title: '',
@@ -13,15 +15,29 @@ export default function SellerDashboard() {
     image: ''
   });
 
-
- useEffect(() => {
+  useEffect(() => {
     const storedUser = localStorage.getItem('seller');
     if (storedUser) {
-      setSeller(JSON.parse(storedUser));
+      const parsedSeller = JSON.parse(storedUser);
+      setSeller(parsedSeller);
     }
   }, []);
 
+  useEffect(() => {
+    if (seller) {
+      fetchMyBooks();
+    }
+  }, [seller]);
 
+  const fetchMyBooks = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/books/seller/${seller._id}`);
+      const data = await response.json();
+      setBooks(data);
+    } catch (err) {
+      console.error('Failed to fetch books', err);
+    }
+  };
 
   const logout = () => {
     localStorage.removeItem('seller');
@@ -32,77 +48,57 @@ export default function SellerDashboard() {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      await axios.post('http://localhost:5000/api/books', {
-        ...book,
-        seller: seller._id
-      });
-      alert('Book added successfully');
-      setBook({ title: '', price: '', description: '', image: '' });
-      setShowForm(false);
-    } catch (err) {
-      alert('Failed to add book');
-    }
-  };
+  const formData = new FormData();
+  formData.append('title', book.title);
+  formData.append('price', book.price);
+  formData.append('description', book.description);
+  formData.append('image', book.image); // ✅ file object
+  formData.append('sellerId', seller._id); // ✅ sellerId
+
+  try {
+    await axios.post('http://localhost:5000/api/books', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    alert('Book added successfully');
+    setBook({ title: '', price: '', description: '', image: '' });
+    setShowForm(false);
+  } catch (err) {
+    console.error(err);
+    alert('Failed to add book');
+  }
+};
+
   return (
-    <div className="seller-dashboard" style={{ padding: '1rem' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <>
+        <header className="dashboard-header">
         <h2>Welcome, {seller?.name || 'Seller'}!</h2>
         <div>
-          <button onClick={() => setShowForm(!showForm)} style={styles.button}>
+          <button onClick={() => setShowForm(!showForm)} className="btn primary">
             {showForm ? 'Cancel' : 'Add Book'}
           </button>
-          <button onClick={logout} style={{ ...styles.button, backgroundColor: '#f44336' }}>Logout</button>
+          <button onClick={logout} className="btn danger">Logout</button>
+          <button onClick={() => navigate('/seller/books')} className="btn primary" style={{ marginLeft: '1rem' }}>
+            View My Books
+          </button>
         </div>
       </header>
 
       {showForm && (
-        <div className='seller'>
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <input name="title" value={book.title} onChange={handleChange} placeholder="Title" required />
-          <input name="price" value={book.price} onChange={handleChange} placeholder="Price" required type="number" />
-          <textarea name="description" value={book.description} onChange={handleChange} placeholder="Description" />
-          <input type = "file" name="image" value={book.image} onChange={handleChange} placeholder="Image URL" required />
-          <button type="submit" style={styles.submit}>Submit</button>
-        </form>
-         </div>
+        <div className="seller-form-wrapper">
+          <form onSubmit={handleSubmit} className="book-form">
+            <input name="title" value={book.title} onChange={handleChange} placeholder="Title" required />
+            <input name="price" value={book.price} onChange={handleChange} placeholder="Price" required type="number" />
+            <input type="file" name="image" accept="image/*" onChange={(e) => setBook({ ...book, image: e.target.files[0] })} required/>
+            <textarea name="description" value={book.description} onChange={handleChange} placeholder="Description" />
+            <button type="submit" className="submit-btn">Submit</button>
+          </form>
+        </div>
       )}
-    </div>
+    </>
   );
 }
-
-const styles = {
-  seller: {
-     alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1rem'
-  },
-  button: {
-    marginLeft: '1rem',
-    padding: '6px 12px',
-    backgroundColor: '#2196f3',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: '1rem',
-    maxWidth: '400px',
-    gap: '10px'
-  },
-  submit: {
-    padding: '8px',
-    backgroundColor: 'green',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer'
-  }
-};

@@ -1,4 +1,12 @@
 /* Header and Title */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', Times, serif;
+  height: 100vh;
+  background-color: #092136;
+}
+
 .home-header {
   position: static;
   top: 0;

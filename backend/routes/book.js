@@ -1,6 +1,6 @@
 import express from 'express';
 import Book from '../models/Book.js';
-
+import { upload } from '../middleware/upload.js';
 const app = express.Router();
 
 // Fetch all books
@@ -14,26 +14,31 @@ app.get('/', async (req, res) => {
 });
 
 
-
-
-app.post('/', async (req, res) => {
+app.post('/', upload.single('image'), async (req, res) => {
   try {
-    const { title, price, description, image, sellerId } = req.body;
+    const { title, price, description, sellerId } = req.body;
+    const image = req.file?.filename;
+
+    if (!title || !price || !description || !image || !sellerId) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
 
     const newBook = new Book({
       title,
       price,
       description,
-      image,
+      image: `/uploads/${image}`, // serve this as static
       seller: sellerId,
     });
 
     await newBook.save();
     res.status(201).json({ message: 'Book added successfully', book: newBook });
   } catch (error) {
+    console.error("Error adding book:", error);
     res.status(500).json({ error: error.message });
   }
 });
+
 // Get all books by a specific seller
 app.get('/seller/:sellerId', async (req, res) => {
   try {
@@ -43,10 +48,6 @@ app.get('/seller/:sellerId', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-
-
-
 
 
 // Seed books (optional utility)

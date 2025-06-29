@@ -1,5 +1,44 @@
-.seller form{
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.login-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-container input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.login-container button {
+  width: 50%;
+  padding: 10px;
+  background-color: #717527;
+  border: none;
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.login-container button:hover {
+  background-color: #1976d2;
 }

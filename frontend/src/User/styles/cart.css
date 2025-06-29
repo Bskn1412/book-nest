@@ -1,10 +1,14 @@
-.ff h2,p{
-    color: white;
+.ff h2 {
+  text-align: center;
+  color: #da3636;
+  font-size: 2rem;
 }
 p{
+    color: #ffffff;
     font-size: 1.2rem;
-    margin: 0.5rem 0;
+    margin: 0;
     align-items: center;
     justify-content: center;
     display: flex;
 }
+/* Book Grid */

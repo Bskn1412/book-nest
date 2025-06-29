@@ -1,5 +1,91 @@
-.container{
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', Times, serif;
+  height: 100vh;
+  background-color: #092136;
+}
+.container {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
+}
+
+/* Centered blur container */
+.container form {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 40px 30px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  text-align: center;
+  width: 300px;
+}
+
+/* Form title */
+.container form h1 {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/* Input styling */
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Button styling */
+form button {
+  width: 50%;
+  padding: 10px;
+  background-color: #717527;
+  border: none;
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+form button:hover {
+  background-color: #906b4d;
+}
+
+
+.check p{
+  color: #9fd713;
+}
+.check button{
+   width: 50%;
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid #e0df75;
+  color: rgb(208, 239, 84);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.check button:hover {
+   transition: background-color 0.5s ease;
+   border-radius:20px;
+}
+
+form select {
+  width: 105%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.8);
 }

@@ -1,11 +1,18 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, mongoose } from 'mongoose';
 
 const bookSchema = new Schema({
   title: { type: String, required: true },
   author: String,
   description: String,
-  image: String, // URL of the image
-  price: Number
+  price: Number,
+  image: {
+  type: String,
+  required: true,
+},
+ seller: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Seller',
+  }
 });
 
 const Book = model('Book', bookSchema);

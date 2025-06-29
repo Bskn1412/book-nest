@@ -26,7 +26,7 @@ export default function UserSign() {
     name, email, password,role
   });
   alert(response.data.message || 'Signup successful!');
-  navigate('/login'); // or '/' depending on your route setup
+  navigate('/'); // or '/' depending on your route setup
   } 
   catch (error) {
     if (error.response?.status === 409) {
@@ -37,7 +37,7 @@ export default function UserSign() {
   }
 };
   const handleLoginClick = () => {
-    navigate('/');
+    navigate('/user/login');
   };
 
 return (
@@ -54,11 +54,11 @@ return (
         <input type="email" name='email' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} required /><br />
         <input type="password" name='password' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} required /><br />
         <input type="password" name='re-password' placeholder='re-type password' value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} required /><br />
-        <button type='submit'>SignUp</button>
+        <button type='submit'>SignUp</button><br /><br />
 
 
          <div className='check'>
-      <p>Already have an account?</p>
+      <p>Already have an account?</p><br />
       <button onClick={handleLoginClick}>Go to Login</button>
     </div>
     </form>
