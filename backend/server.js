@@ -10,6 +10,8 @@ import bookRoutes from './routes/book.js';
 //import loginRoutes from './routes/auth.js';
 import userLogin from './routes/userlog.js';
 import sellerLogin from './routes/sellerlog.js';
+import adminSeed from './routes/admin.js';
+import adminLogin from './routes/adminLog.js';
 fetch('http://localhost:5000/api/books/seed', { method: 'POST' });
 dotenv.config();
 
@@ -31,6 +33,9 @@ app.use('/api/user/login', userLogin);
 app.use('/api/seller/login', sellerLogin);
 
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
+app.use('/api/admin', adminSeed);
+app.use('/api/admin/login', adminLogin);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

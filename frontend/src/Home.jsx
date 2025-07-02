@@ -46,6 +46,7 @@ export default function Home() {
                 <button onClick={() => navigate('/user/login')}>Login</button>
                 <button onClick={() => navigate('/user/signup')}>User</button>
                 <button onClick={() => navigate('/seller/signup')}>Seller</button>
+                <button onClick={() => navigate('/admin/login')}>Admin</button>
               </>
             ) : (
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: "10px" }}>

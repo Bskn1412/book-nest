@@ -1,9 +1,7 @@
-export default function App() {
+export default function AdminDashboard() {
   return (
-    <div className="app">
-      <h1>Admin Dashboard</h1>
-      <p>Welcome to the admin dashboard!</p>
-
+    <div className="container">
+      <h2>📊 Admin Dashboard</h2>
     </div>
   );
 }

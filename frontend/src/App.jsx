@@ -13,6 +13,8 @@ import Cart from './User/Cart';
 import Favorites from './User/Favorites';
 import OrderHistory from './User/OrderHistory';
 import MyBooks from './Seller/MyBooks';
+import Admin from './Admin/Login';
+import AdminDashboard from './Admin/AdminDashboard';
 export default function App() {
   return (
     <Router>
@@ -33,6 +35,8 @@ export default function App() {
           <Route path="/seller/login" element={<SellerLogin />} />
           <Route path="/seller/books" element={<MyBooks />} />
 
+          <Route path="/admin/login" element={<Admin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );
